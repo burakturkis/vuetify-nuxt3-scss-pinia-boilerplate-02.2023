@@ -1,4 +1,4 @@
-# Nuxt 3 Minimal Starter
+# Nuxt 3 Minimal Starter (Typescript) / Vuetify 3.1.3
 
 Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
@@ -10,7 +10,13 @@ Required node version: >=19.0.0
 
 Basic middleware was added to project for auth. You can use it as a template for your own middleware.
 
-Auth middleware control in composables/useAuth
+Auth middleware control in /composables/useAuth
+
+Pinia was implemented in /store folder.
+
+2 Layouts added (default, auth).
+
+Vuetify v3.1.3 was implemented.
 
 
 ```bash
