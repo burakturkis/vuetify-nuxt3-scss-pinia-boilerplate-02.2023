@@ -1,0 +1,10 @@
+// variables not needed in this file, It's already imported in the project globally
+@import "variables";
+
+html,
+body {
+    padding: 12px;
+}
+h1 {
+    color: $red;
+}
