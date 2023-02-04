@@ -4,8 +4,9 @@ interface State {
     user: UserInfo | null
 }
 interface UserInfo {
-    name: string
-    age: number
+    full_name?: string | "Full name",
+    email: string,
+    password?: string,
 }
 
 export const useUserStore = defineStore('user', {
@@ -15,12 +16,14 @@ export const useUserStore = defineStore('user', {
             user: null,
         }
     },
-    getters: {
-        getUser: (state) => state.user,
-    },
     actions: {
-        increment(user: UserInfo) {
-            this.user = user
+        setUser(loginUser: UserInfo) {
+            this.user = loginUser
         },
-    },
+        logout() {
+            this.user = null
+            navigateTo('/')
+        }
+    }
+
 })
