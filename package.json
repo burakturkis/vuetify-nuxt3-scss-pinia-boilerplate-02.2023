@@ -1,4 +1,9 @@
 {
+  "author": {
+    "name": "Burak Türkis",
+    "email": "ugur@burakturkis.com",
+    "url": "https://github.com/burakturkis/"
+  },
   "private": true,
   "scripts": {
     "build": "nuxt build",
@@ -18,5 +23,6 @@
     "@pinia/nuxt": "^0.4.6",
     "sass": "^1.58.0",
     "vuetify": "^3.1.3"
-  }
+  },
+  "license": "MIT"
 }
