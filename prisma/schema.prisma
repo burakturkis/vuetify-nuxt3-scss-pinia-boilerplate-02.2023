@@ -6,14 +6,14 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
 model Post {
   id        Int      @id @default(autoincrement())
-  title     String   @db.VarChar(255)
-  createdAt DateTime @default(now()) @db.Timestamp(6)
+  title     String
+  createdAt DateTime @default(now())
   content   String?
   published Boolean  @default(false)
   author    User     @relation(fields: [authorId], references: [id])
@@ -25,18 +25,18 @@ model Profile {
   bio       String?
   user      User      @relation(fields: [userId], references: [id])
   userId    Int       @unique
-  createdAt DateTime  @default(now()) @db.Timestamp(6)
-  updatedAt DateTime  @updatedAt @db.Timestamp(6)
-  deletedAt DateTime? @db.Timestamp(6)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
 }
 
 model User {
   id       Int     @id @default(autoincrement())
-  username String? @db.VarChar(255)
-  email    String  @unique @db.VarChar(255)
-  password String? @db.VarChar(255) /// @encypted
-  image    String? @db.VarChar(255)
-  fullname String? @map("fullName") @db.VarChar(255)
+  username String?
+  email    String  @unique
+  password String?
+  image    String?
+  fullname String? @map("fullName")
 
   posts   Post[]
   profile Profile?

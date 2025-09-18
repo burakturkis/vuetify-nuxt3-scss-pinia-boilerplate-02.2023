@@ -1,31 +1,36 @@
 import { user_services } from '~~/server/utils'
 
 export default defineEventHandler(async (event) => {
-    const body = await readBody(event)
-    const isRegistered = await user_services.isRegistered(body.email)
-    console.log('isRegistered', isRegistered)
+    try {
+        const body = await readBody(event)
+        
+        // Validate required fields
+        if (!body.email || !body.password || !body.username || !body.fullname) {
+            throw createError({
+                statusCode: 400,
+                statusMessage: 'Missing required fields'
+            })
+        }
 
-    if (!isRegistered) {
-        const user = user_services.register(body)
+        const result = await user_services.register(body)
 
-        // const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-        //     expiresIn: '1d',
-        // })
+        if (result.error) {
+            throw createError({
+                statusCode: 400,
+                statusMessage: result.error
+            })
+        }
 
-        // return {
-        //     statusCode: 200,
-        //     body: {
-        //         token,
-        //         user,
-        //     },
-        // }
-        return { user }
-    }
-
-    return {
-        statusCode: 400,
-        body: {
-            message: 'User already registered',
-        },
+        return {
+            success: true,
+            user: result.user,
+            message: 'Registration successful'
+        }
+    } catch (error: any) {
+        console.error('Registration API error:', error)
+        throw createError({
+            statusCode: error.statusCode || 500,
+            statusMessage: error.statusMessage || 'Registration failed'
+        })
     }
 })

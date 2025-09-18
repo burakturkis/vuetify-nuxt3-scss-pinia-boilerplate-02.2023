@@ -1,11 +1,15 @@
 export default defineEventHandler((event) => {
-    // console.log('request is => ', event.node.req)
-    console.log(event.node.req.url)
+    const url = event.node.req.url
     const { authorization } = event.node.req.headers
     
-    if (event.node.req.url?.includes('api') && !authorization) {
+    // Skip auth check for login/register endpoints
+    const authEndpoints = ['/api/auth/login', '/api/auth/register']
+    const isAuthEndpoint = authEndpoints.some(endpoint => url?.includes(endpoint))
+    
+    if (url?.includes('api') && !authorization && !isAuthEndpoint) {
         const error = createError({ statusCode: 401, statusMessage: 'Unauthorized' })
         sendError(event, error, false)
     }
+    
     event.context.auth = { user: 123 }
 })

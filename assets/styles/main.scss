@@ -1,5 +1,5 @@
 // variables not needed in this file, It's already imported in the project globally
-@import "variables";
+@use "variables" as *;
 
 html,
 body {
