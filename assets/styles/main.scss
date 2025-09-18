@@ -1,6 +1,7 @@
-// variables not needed in this file, It's already imported in the project globally
-@import "transitions";
-@import "variables";
+// Modern Sass syntax using @use instead of @import
+@use "sass:color";
+@use "transitions";
+@use "variables";
 
 html,
 body {
@@ -8,5 +9,5 @@ body {
     margin: 0;
 }
 h1 {
-    color: lighten($blue, 8);
+    color: color.adjust(variables.$blue, $lightness: 8%);
 }
