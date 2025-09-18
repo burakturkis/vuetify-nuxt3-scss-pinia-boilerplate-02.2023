@@ -19,6 +19,8 @@ Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introdu
 - ✅ **Added compatibility date**: Enhanced Nuxt configuration for better stability
 - ✅ **Eliminated all deprecation warnings**: Future-proof SCSS implementation
 
+- You can find prisma and basic authentication version on withPrisma branch
+
 ## Setup
 
 Make sure to install the dependencies:
